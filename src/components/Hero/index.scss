@@ -1,0 +1,92 @@
+.hero {
+    position: relative;
+
+    &__left {
+        position: absolute;
+        top: calc(50% - 25px);
+        left: 2%;
+        z-index: 1;
+        cursor: pointer;
+        i{
+            font-size: 50px;
+        }
+    }
+
+    &__right {
+        position: absolute;
+        top: calc(50% - 25px);
+        right: 2%;
+        z-index: 1;
+        cursor: pointer;
+        i{
+            font-size: 50px;
+        }
+    }
+
+    &__images {
+        height: calc(100vh - 40px);
+        
+        &__back ,&__front  {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            left: calc(50vw - 50%);
+            img{
+                height: 100%;
+                object-fit: cover;
+                width: 100%;
+            }
+        }
+    }
+
+    &__text{
+        &__item{
+            position: absolute;
+            z-index: 5;
+            top: 40%;
+            left: 30%;
+            color: #333;
+            span{
+                font-size: 20px;
+            }
+            h2{
+                font-size: 50px;
+                margin-bottom: 50px;
+            }
+            a{
+                display: inline;
+                border-radius: 20px;
+                padding: 15px;
+                font-size: 20px;
+                background-color: rebeccapurple;
+                color: #FFFFFF;
+            }
+        }
+    }
+    
+}
+
+@keyframes image-back {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+@keyframes image-front {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}

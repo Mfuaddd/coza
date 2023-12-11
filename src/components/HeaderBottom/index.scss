@@ -1,0 +1,40 @@
+.header__bottom{
+    position: fixed;
+    top:40px;
+    left:0;
+    background-color: transparent;
+    height: 90px;
+    width: 100%;
+    z-index: 1;
+
+    &__wrapper{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+    }
+
+    &__logo{
+        padding-right: 50px;
+    }
+
+    &__navbar{
+        display: flex;
+        align-items: center;
+        > li{
+            padding:15px;
+            font-size: 14px;
+        }
+
+    }
+
+    &__icons{
+        display: flex;
+        align-items: center;
+        justify-content: right;
+        flex-grow: 1;
+        > li{
+            padding: 15px;
+        }
+    }
+}
