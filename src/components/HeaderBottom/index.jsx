@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./index.scss";
 
 function HeaderBottom() {
+  const [scrolled, setScrolled] = useState(false);
+
+  function handleScroll() {
+    if (window.scrollY > 40) {
+      setScrolled(true)
+    }
+    else{
+      setScrolled(false)
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("scroll", handleScroll);
+
+    return () => {
+      document.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="header__bottom">
+    <div className={`header__bottom ${scrolled ? "scrolled" : null}`  }>
       <div className="container">
         <div className="header__bottom__wrapper">
           <div className="header__bottom__logo">

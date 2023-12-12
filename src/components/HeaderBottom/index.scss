@@ -1,11 +1,18 @@
-.header__bottom{
+.header__bottom.scrolled{
     position: fixed;
+    top:0;
+    height: 70px;
+    background-color: #FFFFFF;
+}
+.header__bottom{
+    transition: all 300ms;
+    position: absolute;
     top:40px;
     left:0;
     background-color: transparent;
     height: 90px;
     width: 100%;
-    z-index: 1;
+    z-index: 2;
 
     &__wrapper{
         display: flex;

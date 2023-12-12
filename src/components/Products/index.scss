@@ -1,58 +1,145 @@
-.products{
-    &__header{
+.products {
+    &__header {
         margin-bottom: 15px;
-        h3{
+
+        h3 {
             font-size: 36px;
             line-height: 1.1;
-            // text-transform: uppercase;
         }
     }
-    &__top{
+
+    &__top {
         display: flex;
         align-items: center;
         justify-content: center;
         margin-bottom: 30px;
-        
-        &__categories{
+
+        &__categories {
             display: flex;
             align-items: center;
             flex-grow: 1;
-            >li{
+
+            >li {
                 padding-top: 10px;
                 margin-right: 25px;
+                border-bottom: 1px solid #FFFFFF;
+                transition: all 300ms;
+
+                &:hover {
+                    border-bottom: 1px solid #797979;
+
+                }
             }
-            .active{
+
+            .active {
                 border-bottom: 1px solid #797979;
             }
         }
 
-        &__filter , &__search{
+        &__filter,
+        &__search {
             padding: 10px 15px;
             border: 1px solid #e6e6e6;
             margin-left: 10px;
             color: #333;
-            > i{
+
+            >i {
                 margin-right: 5px;
             }
         }
 
     }
-    &__items{
+
+    &__items {
         display: grid;
-        grid-template-columns: repeat(auto-fit ,minmax(250px,1fr));
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
+        transition: all 500ms;
     }
-    &__item{
-        padding: 10px;
-        &__name{
+
+    &__item {
+        border: 1px solid #e6e6e6;
+
+        &__image {
+            position: relative;
+            overflow: hidden;
+
+            img {
+                transition: all 500ms ease-out;
+            }
+            button{
+                transition: all 500ms ease-out;
+                position: absolute;
+                cursor: pointer;
+                left: 50%;
+                transform:translateX(-50%) translateY(10px);    
+                border: none;
+                border-radius: 20px;
+                background-color: #e6e6e6;
+                padding: 15px;
+                color: #333;
+                &:hover{
+                    color: white;
+                    background-color: #333;
+                }
+            }
+        }
+
+        &__name {
+            padding: 0 10px;
             display: block;
             color: #999;
             font-size: 14px;
-            margin-bottom: 10px;
             width: 80%;
         }
-        &__price{
+
+        &__price {
+            padding: 10px;
             display: block;
             color: #666;
         }
+
+        &:hover {
+            img {
+                transform: scale(1.1);
+            }
+            button{
+                transform:translateX(-50%) translateY(-60px);
+            }
+        }
+    }
+
+    &__pop-up.active {
+        height: 60px;
+    }
+
+    &__pop-up {
+        overflow: hidden;
+        position: relative;
+        height: 0;
+        margin-bottom: 20px;
+        transition: all 400ms;
+        transform-origin: top;
+
+        &__search {
+            >i {
+                position: absolute;
+                width: 60px;
+                height: 60px;
+                text-align: center;
+                line-height: 60px;
+            }
+
+            >input {
+                width: 100%;
+                height: 60px;
+                outline: none;
+                border: 1px solid #e6e6e6;
+                padding-left: 60px;
+            }
+
+            width: 100%;
+        }
+
     }
 }
