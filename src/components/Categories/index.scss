@@ -10,11 +10,42 @@
     }
     &__item{
         border: 1px solid #e6e6e6;
-        padding: 40px;
         width: 100%;
         height: 100%;
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        &__text{
+            transition: all 300ms;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+        &__anima{
+            display: inline-block;
+            transition: transform 400ms, padding 600ms;
+            // transition: padding 500ms;
+            transform-origin: center;
+            color: white;
+            transform: scaleX(0);
+            opacity: 0;
+            border-bottom: 2px solid white;
+            line-height: 100%;
+        }
+        &__text:hover{
+            background-color: rgba(103,117,214,0.8);
+            color: #FFFFFF;
+            .categories__item__anima{
+                transform: scaleX(100%);
+                padding-bottom: 15px;
+                opacity: 1;
+            }
+        }
+
     }
 }
