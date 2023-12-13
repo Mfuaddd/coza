@@ -17,7 +17,7 @@ function Modal({setItem,item}) {
                 <p>{item.name}</p>
                 <p>{item.price}</p>
                 <p>{item.description.text}</p>
-                <button onClick={()=>addToBasket()}>Add To basket</button>
+                <button onClick={()=>addToBasket(item)}>Add To basket</button>
             </div>
         </div>
     </div>

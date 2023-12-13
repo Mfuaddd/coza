@@ -1,4 +1,5 @@
 import './App.scss';
+import AsideBar from './components/AsideBar';
 import Modal from './components/Modal';
 import Home from './pages/home';
 
