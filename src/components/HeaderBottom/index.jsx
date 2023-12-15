@@ -3,12 +3,20 @@ import "./index.scss";
 import { useContext } from "react";
 import { BasketContext } from "../../contexts/BasketContext";
 import AsideBar from "../AsideBar";
+import { wishlistContext } from "../../contexts/WishlistContext";
 
 function HeaderBottom() {
   const [scrolled, setScrolled] = useState(false);
-  const { basket,removeFromBasket,icreaseItemCount,decreaseItemCount,totalPrice } = useContext(BasketContext);
   const [isOpenBasket, setIsOpenBasket] = useState(false);
-  const [isTransitionEnd, setIsTransitionEnd] = useState(true);
+  const [isOpenWishlist, setIsOpenWishlist] = useState(false);
+  const { wishlist, toggleWishlist } = useContext(wishlistContext);
+  const {
+    basket,
+    removeFromBasket,
+    icreaseItemCount,
+    decreaseItemCount,
+    totalPrice,
+  } = useContext(BasketContext);
 
   function handleScroll() {
     if (window.scrollY > 40) {
@@ -27,36 +35,60 @@ function HeaderBottom() {
   }, []);
   return (
     <>
-      <div
-        className={`aside ${isOpenBasket ? "aside--open" : ""}`}
-        onTransitionEnd={() => setIsTransitionEnd(!isTransitionEnd)}
-        style={isTransitionEnd ? isOpenBasket ? null: { zIndex: "-1" }: null}
+      <AsideBar
+        isOpen={isOpenBasket}
+        setIsOpen={setIsOpenBasket}
+        head={"your cart"}
       >
-        <div className="aside__body">
-          <div className="aside__head">
-            <h2>your cart</h2>
-            <span onClick={() => setIsOpenBasket(false)}>&#10005;</span>
-          </div>
-          <div className="aside__items">
-            {basket.map((x) => (
-              <div className="aside__card">
-                <img className="aside__card__image" src={x.thumbnail} alt="" />
-                <div className="aside__card__text">
-                  <div className="aside__card__name">{x.name}</div>
-                  <div className="aside__card__price">${x.price}</div>
-                  <div className="aside__card__count">
-                    <button onClick={()=>decreaseItemCount(x)}>-</button><span>{x.count}</span><button onClick={()=>icreaseItemCount(x)}>+</button>
-                  </div>
+        {basket.map((x) => (
+          <>
+            <div className="aside__card">
+              <img className="aside__card__image" src={x.thumbnail} alt="" />
+              <div className="aside__card__text">
+                <div className="aside__card__name">{x.name}</div>
+                <div className="aside__card__price">${x.price}</div>
+                <div className="aside__card__count">
+                  <button onClick={() => decreaseItemCount(x)}>-</button>
+                  <span>{x.count}</span>
+                  <button onClick={() => icreaseItemCount(x)}>+</button>
                 </div>
-                <button className="aside__card__delete" onClick={()=>removeFromBasket(x)}><span>delete</span></button>
               </div>
-            ))}
-          </div>
-          <div className="aside__bottom">
-            <p>Total Price: ${totalPrice()}</p>
-          </div>
-        </div>
-      </div>
+              <button
+                className="aside__card__delete"
+                onClick={() => removeFromBasket(x)}
+              >
+                <div>DELETE</div>
+              </button>
+            </div>
+            <div className="aside__bottom">
+              <p>Total Price: ${totalPrice()}</p>
+            </div>
+          </>
+        ))}
+      </AsideBar>
+      <AsideBar
+        isOpen={isOpenWishlist}
+        setIsOpen={setIsOpenWishlist}
+        head={"Wishlist"}
+      >
+        {wishlist.map((x) => (
+          <>
+            <div className="aside__card">
+              <img className="aside__card__image" src={x.thumbnail} alt="" />
+              <div className="aside__card__text">
+                <div className="aside__card__name">{x.name}</div>
+                <div className="aside__card__price">${x.price}</div>
+              </div>
+              <button
+                className="aside__card__delete"
+                onClick={() => toggleWishlist(x)}
+              >
+                <div>DELETE</div>
+              </button>
+            </div>
+          </>
+        ))}
+      </AsideBar>
       <div className={`header__bottom ${scrolled ? "scrolled" : null}`}>
         <div className="container">
           <div className="header__bottom__wrapper">
@@ -82,8 +114,9 @@ function HeaderBottom() {
                 <i className="fa-solid fa-cart-shopping"></i>
                 <sup>{basket.length}</sup>
               </li>
-              <li>
+              <li onClick={() => setIsOpenWishlist(true)}>
                 <i className="fa-regular fa-heart"></i>
+                <sup>{wishlist.length}</sup>
               </li>
             </ul>
           </div>

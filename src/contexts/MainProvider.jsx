@@ -1,15 +1,18 @@
-import React from 'react'
-import FetchProvider from './FetchContext'
-import BaskeProvider from './BasketContext'
+import React from "react";
+import FetchProvider from "./FetchContext";
+import BasketProvider from "./BasketContext";
+import WishlistProvider from "./WishlistContext";
 
-function MainProvider({children}) {
+function MainProvider({ children }) {
   return (
     <FetchProvider>
-      <BaskeProvider>
-        {children}
-      </BaskeProvider>
+      <BasketProvider>
+        <WishlistProvider>
+          {children}
+        </WishlistProvider>
+      </BasketProvider>
     </FetchProvider>
-  )
+  );
 }
 
-export default MainProvider
+export default MainProvider;

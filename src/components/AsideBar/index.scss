@@ -2,7 +2,7 @@
     transition: background-color 1s;
     display: flex;
     position: fixed;
-    justify-content: end;
+    justify-content: flex-end;
     top: 0;
     left: 0;
     z-index: 2;
@@ -36,13 +36,20 @@
     &__card {
         display: flex;
         align-items: center;
-        justify-content: left;
+
+
+        justify-content: space-between;
         gap: 15px;
 
         &__image {
-            object-fit: contain;
-            width: 200px;
-            height: 200px;
+            // object-fit: contain;
+            // max-width: 200px;
+            width: 40%;
+            // max-height: 200px;
+            height: 40%;
+        }
+        &__text{
+            flex-grow: 1;
         }
 
         &__name {
@@ -63,6 +70,7 @@
                 outline: none;
                 background-color: #717fe0;
                 color: #FFF;
+
             }
             span{
                 display: block;
@@ -77,10 +85,15 @@
             background-color: #717fe0;
             border: none;
             outline: none;
-            height: 100px;
             color: #fff;
-            span{
-                text-orientation: upright;
+
+            > div{
+                writing-mode: vertical-lr;
+                text-orientation: mixed;
+                letter-spacing: 1px ;
+                width: 30px;
+                height: 15%;
+                line-height: 30px;
             }
     
         }

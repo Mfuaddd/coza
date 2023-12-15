@@ -1,29 +1,21 @@
-import React, { useContext } from "react";
-import { BasketContext } from "../../contexts/BasketContext";
+import React, { useState } from "react";
 import "./index.scss";
 
-function AsideBar() {
-  const { basket } = useContext(BasketContext);
+function AsideBar({ isOpen, setIsOpen, head, children }) {
+  const [isTransitionEnd, setIsTransitionEnd] = useState(true);
+
   return (
-    <div className="aside">
+    <div
+      className={`aside ${isOpen ? "aside--open" : ""}`}
+      onTransitionEnd={() => setIsTransitionEnd(!isTransitionEnd)}
+      style={isTransitionEnd ? (isOpen ? null : { zIndex: "-1" }) : null}
+    >
       <div className="aside__body">
         <div className="aside__head">
-          <h2>your card</h2>
-          <span>&#10005;</span>
+          <h2>{head}</h2>
+          <span onClick={() => setIsOpen(false)}>&#10005;</span>
         </div>
-        <div className="aside__items">
-          {basket.map((x) => (
-            <div className="aside__card">
-              <img className="aside__card__image" src={x.thumbnail} alt="" />
-              <div className="aside__card__text">
-                <div className="aside__card__name">{x.name}</div>
-                <div className="aside__card__price">
-                  {x.count} x ${x.price}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <div className="aside__items">{children}</div>
       </div>
     </div>
   );

@@ -1,20 +1,16 @@
-import React, { createContext, useState } from "react";
+import React, { createContext } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 export const BasketContext = createContext();
 
-function BaskeProvider({ children }) {
+function BasketProvider({ children }) {
   const [basket, setBasket] = useLocalStorage("basket", []);
 
-  function addToBasket(item) {
+  function addToBasket(item, count) {
     const itemIndex = basket.findIndex((x) => x.id === item.id);
-    console.log(itemIndex);
 
     if (itemIndex === -1) {
-      setBasket([...basket, { ...item, count: 1 }]);
-    } else {
-      basket[itemIndex].count++;
-      setBasket([...basket]);
+      setBasket([...basket, { ...item, count: count }]);
     }
   }
   function icreaseItemCount(item) {
@@ -24,14 +20,14 @@ function BaskeProvider({ children }) {
   }
   function decreaseItemCount(item) {
     const itemIndex = basket.findIndex((x) => x.id === item.id);
-    if(basket[itemIndex].count > 1){
+    if (basket[itemIndex].count > 1) {
       basket[itemIndex].count--;
     }
     setBasket([...basket]);
   }
 
   function totalPrice() {
-    return basket.reduce((total,x)=>total + x.count * x.price,0).toFixed(2)
+    return basket.reduce((total, x) => total + x.count * x.price, 0).toFixed(2);
   }
 
   function removeFromBasket(item) {
@@ -44,11 +40,11 @@ function BaskeProvider({ children }) {
     removeFromBasket,
     icreaseItemCount,
     decreaseItemCount,
-    totalPrice
+    totalPrice,
   };
   return (
     <BasketContext.Provider value={data}>{children}</BasketContext.Provider>
   );
 }
 
-export default BaskeProvider;
+export default BasketProvider;

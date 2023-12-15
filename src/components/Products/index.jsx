@@ -2,9 +2,11 @@ import React, { useCallback, useContext, useState } from "react";
 import "./index.scss";
 import { FetchContext } from "../../contexts/FetchContext";
 import Modal from "../Modal";
+import { wishlistContext } from "../../contexts/WishlistContext";
 
 function Products() {
   const { apiData } = useContext(FetchContext);
+  const { wishlist, toggleWishlist } = useContext(wishlistContext);
   const [searchPopUp, setSearchPopUp] = useState(true);
   const [input, setInput] = useState("");
   const [category, setCategory] = useState("all");
@@ -77,6 +79,8 @@ function Products() {
         </div>
         <div className="products__items">
           {apiData.map((x) => {
+            const inWish = wishlist.some(w => w.id === x.id)
+            console.log(inWish);
             if (
               x.name.toLowerCase().includes(input.toLowerCase()) &&
               (x.category === category || category === "all")
@@ -89,6 +93,10 @@ function Products() {
                   </div>
                   <span className="products__item__name">{x.name}</span>
                   <span className="products__item__price">${x.price}</span>
+                  <div onClick={()=>toggleWishlist(x)} className="products__item__heart">
+                    <i className={`${inWish ? "" : "active"} fa-regular fa-heart`}></i>
+                    <i className={`${inWish ? "active" : ""} fa-solid fa-heart`}></i>
+                  </div>
                 </div>
               );
             }
